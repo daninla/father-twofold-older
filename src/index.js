@@ -14,7 +14,7 @@ function yearsToDoubleAge(father, son) {
     father < 0 ||
     father - son < 15
   ) {
-    return -1;
+    return NaN;
   }
 
   const years = father - 2 * son;
@@ -28,7 +28,7 @@ function yearsToDoubleAge(father, son) {
  */
 
 function formatResult(years) {
-  if (years === -1) {
+  if (isNaN(years)) {
     return "Некоректні дані";
   }
 
