@@ -17,8 +17,7 @@ function yearsToDoubleAge(father, son) {
     return NaN;
   }
 
-  const years = father - 2 * son;
-  return years;
+  return father - 2 * son;
 }
 
 /**
@@ -35,27 +34,31 @@ function formatResult(years) {
   const abs = Math.abs(years);
   let word;
 
-  switch (true) {
-    case abs % 10 === 1 && abs % 100 !== 11:
-      word = "рік";
-      break;
-    case abs % 10 >= 2 && abs % 10 <= 4 && (abs % 100 < 10 || abs % 100 >= 20):
-      word = "роки";
-      break;
-    default:
-      word = "років";
+  if (abs < 11 || abs > 14) {
+    switch (String(years).slice(-1)) {
+      case "1":
+        word = "рік";
+        break;
+      case "2":
+      case "3":
+      case "4":
+        word = "роки";
+        break;
+      default:
+        word = "років";
+    }
   }
 
   if (years > 0) {
     return `Через ${years} ${word} батько буде вдвічі старший за сина.`;
   } else if (years < 0) {
-    return `Вже ${Math.abs(years)} ${word} тому батько був вдвічі старший за сина.`;
+    return `${Math.abs(years)} ${word} тому батько був вдвічі старший за сина.`;
   } else {
     return "Батько зараз вдвічі старший за сина.";
   }
 }
 
-console.log(formatResult(yearsToDoubleAge(47, 18)));
+console.log(formatResult(yearsToDoubleAge(41, 21)));
 console.log(formatResult(yearsToDoubleAge(40, 20)));
 console.log(formatResult(yearsToDoubleAge(30, 15)));
 console.log(formatResult(yearsToDoubleAge(45, null)));
